@@ -1,13 +1,13 @@
 import random
 import sys
 
+
 class Player:
     moves = ['rock', 'paper', 'scissors']
 
     def __init__(self):
         self.score = 0
-        
- 
+
     def move(self):
         return 'rock'
 
@@ -15,12 +15,14 @@ class Player:
         self.my_move = my_move
         self.their_move = their_move
 
+
 class RandomPlayer(Player):
     def __init__(self):
         super().__init__()
 
     def move(self):
         return random.choice(self.moves)
+
 
 class HumanPlayer(Player):
     def __init__(self):
@@ -37,13 +39,15 @@ class HumanPlayer(Player):
             except:
                 sys.exit()
 
+
 class ReflectPlayer(Player):
     def __init__(self):
         super().__init__()
         self.their_move = random.choice(self.moves)
-    
+
     def move(self):
         return self.their_move
+
 
 class CyclePlayer(Player):
     def __init__(self):
@@ -57,7 +61,8 @@ class CyclePlayer(Player):
             return self.moves[2]
         elif self.my_move == self.moves[2]:
             return self.moves[0]
-    
+
+
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -65,9 +70,9 @@ class Game:
 
     def beats(self, one, two):
         return ((one == 'rock' and two == 'scissors') or
-            (one == 'scissors' and two == 'paper') or
-            (one == 'paper' and two == 'rock'))
-    
+                (one == 'scissors' and two == 'paper') or
+                (one == 'paper' and two == 'rock'))
+
     def play_round(self):
         move1 = self.p1.move()
         move2 = self.p2.move()
@@ -76,16 +81,19 @@ class Game:
         if self.beats(move1, move2):
             self.p1.score += 1
             print('** PLAYER ONE WINS **')
-            print(f'Score: Player One {self.p1.score}, Player Two {self.p2.score}')         
+            print(f'Score: Player One {self.p1.score},')
+            print(f'Player Two {self.p2.score}')
         elif move1 == move2:
             self.p1. score = self.p1.score
             self.p2. score = self.p2.score
             print('** TIE **')
-            print(f'Score: Player One {self.p1.score}, Player Two {self.p2.score}')
+            print(f'Score: Player One {self.p1.score},')
+            print(f'Player Two {self.p2.score}')
         else:
             self.p2.score += 1
             print('** PLAYER TWO WINS **')
-            print(f'Score: Player One {self.p1.score}, Player Two {self.p2.score}')
+            print(f'Score: Player One {self.p1.score},')
+            print(f'Player Two {self.p2.score}')
 
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
@@ -106,10 +114,11 @@ class Game:
             print("Game over!, Player Two Won")
         else:
             print("It's a Tie")
-    
-    
+        print('final score:')
+        print(f'player one: {self.p1.score}')
+        print(f'player two: {self.p2.score}')
 
 
 if __name__ == '__main__':
-    game = Game(HumanPlayer(), random.choice([RandomPlayer(), ReflectPlayer(), CyclePlayer()]))
+    game = Game(HumanPlayer(), random.choice([Player(), RandomPlayer(), ReflectPlayer(), CyclePlayer()]))
     game.play_game()
