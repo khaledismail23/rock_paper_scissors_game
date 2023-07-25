@@ -136,7 +136,7 @@ def chose_player():
 
     while True:
         try:
-            print('1)Rock Player')
+            print('1) Rock Player')
             print('2) Random Player')
             print('3) Reflect Player')
             print('4) Cycle Player')
