@@ -36,13 +36,15 @@ class HumanPlayer(Player):
                     return move
                 if move == "quit":
                     sys.exit()
-            except:
+            except BaseException:
                 sys.exit()
 
 
 class ReflectPlayer(Player):
     '''
-    ReflectPlayer class that remembers what move the opponent played last round, and plays that move this round.
+    ReflectPlayer class that remembers what move
+    the opponent played last round,
+    and plays that move this round.
     '''
     def __init__(self):
         super().__init__()
@@ -54,7 +56,8 @@ class ReflectPlayer(Player):
 
 class CyclePlayer(Player):
     '''
-    CyclePlayer class that remembers what move it played last round, and cycles through the different moves.
+    CyclePlayer class that remembers what move
+    it played last round, and cycles through the different moves.
     '''
     def __init__(self):
         super().__init__()
@@ -133,15 +136,15 @@ def chose_player():
 
     while True:
         try:
-            player = int(
-                input(
-                    "select the player you want to play against:\n1) Rock Player\n2) Random Player\n3) Reflect Player\n4) Cycle Player\n"
-                )
-            )
+            print('1)Rock Player')
+            print('2) Random Player')
+            print('3) Reflect Player')
+            print('4) Cycle Player')
+            player = int(input('select the player you want to play against: '))
             if player in [1, 2, 3, 4]:
                 return strategies[player]
-        except ValueError:
-            pass
+        except BaseException:
+            sys.exit()
 
 
 if __name__ == "__main__":
